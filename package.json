@@ -1,0 +1,28 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/aposohin98/algorithms-project-69/workflows/hexlet-check/badge.svg)](https://github.com/aposohin98/algorithms-project-69/actions)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aposohin98/algorithms-project-69.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aposohin98/algorithms-project-69/issues"
+  },
+  "homepage": "https://github.com/aposohin98/algorithms-project-69#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^8.46.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.0",
+    "jest": "^29.6.2"
+  }
+}
