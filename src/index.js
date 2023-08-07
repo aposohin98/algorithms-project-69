@@ -1,44 +1,46 @@
 import removeNonWordCharachers from './utils/removeNonWordCharachers.js';
 
-const getSearchWordCount = (text, searchWord) => {
-  const words = text.split(' ');
+const getDocumentSearchWeight = ({ text }, searchText) => {
+  const textWords = text.split(' ').map(removeNonWordCharachers);
+  const searchWords = searchText.split(' ');
 
-  let count = 0;
+  return searchWords.reduce((weight, searchWord) => {
+    const searchWordWeight = textWords.reduce((wordWeight, textWord) => {
+      if (textWord === searchWord) {
+        return wordWeight + 1;
+      }
 
-  for (let i = 0; i < words.length; i += 1) {
-    const word = words[i];
-    const normalizedWord = removeNonWordCharachers(word);
+      return wordWeight;
+    }, 0);
 
-    if (normalizedWord === searchWord) {
-      count += 1;
-    }
-  }
-
-  return count;
+    return weight + searchWordWeight;
+  }, 0);
 };
 
-const search = (docs, searchWord) => {
+const search = (docs, searchText) => {
   const result = [];
 
-  let lastCount = -1;
+  let previousWeight = -1;
 
   for (let i = 0; i < docs.length; i += 1) {
-    const { id, text } = docs[i];
+    const document = docs[i];
 
-    const count = getSearchWordCount(text, searchWord);
+    const weight = getDocumentSearchWeight(document, searchText);
 
-    if (count === 0) {
+    if (weight === 0) {
       // eslint-disable-next-line no-continue
       continue;
     }
 
-    if (count > lastCount) {
+    const { id } = document;
+
+    if (weight > previousWeight) {
       result.unshift(id);
     } else {
       result.push(id);
     }
 
-    lastCount = count;
+    previousWeight = weight;
   }
 
   return result;
