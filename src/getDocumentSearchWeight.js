@@ -5,13 +5,15 @@ const getDocumentSearchWeight = ({ text }, searchText) => {
   const searchWords = searchText.split(' ');
 
   return searchWords.reduce((weight, searchWord) => {
-    const searchWordWeight = textWords.reduce((wordWeight, textWord) => {
+    const searchWordCount = textWords.reduce((wordCount, textWord) => {
       if (textWord === searchWord) {
-        return wordWeight + 1;
+        return wordCount + 1;
       }
 
-      return wordWeight;
+      return wordCount;
     }, 0);
+
+    const searchWordWeight = searchWordCount / (textWords.length - searchWordCount);
 
     return weight + searchWordWeight;
   }, 0);
