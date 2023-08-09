@@ -1,8 +1,8 @@
-import removeNonWordCharachers from './utils/removeNonWordCharachers.js';
+import getTextWords from './getTextWords.js';
 
 const getDocumentSearchWeight = ({ text }, searchText) => {
-  const textWords = text.split(' ').map(removeNonWordCharachers);
-  const searchWords = searchText.split(' ');
+  const textWords = getTextWords(text);
+  const searchWords = getTextWords(searchText);
 
   return searchWords.reduce((weight, searchWord) => {
     const searchWordCount = textWords.reduce((wordCount, textWord) => {

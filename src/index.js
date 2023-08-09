@@ -1,3 +1,9 @@
-import search from './search.js';
+import SearchEngine from './searchEngine.js';
 
-export default search;
+const app = (docs, searchText) => {
+  const engine = new SearchEngine(docs);
+
+  return engine.search(searchText);
+};
+
+export default app;

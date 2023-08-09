@@ -1,12 +1,20 @@
-import getDocumentSearchWeight from './getDocumentSearchWeight.js';
+import getDocumentSearchWeight from './utils/getDocumentSearchWeight.js';
 
-const search = (docs, searchText) => {
+function SearchEngine(docs) {
+  if (!new.target) {
+    return new SearchEngine(docs);
+  }
+
+  this.docs = docs;
+}
+
+SearchEngine.prototype.search = function search(searchText) {
   const result = [];
 
   let previousWeight = -1;
 
-  for (let i = 0; i < docs.length; i += 1) {
-    const document = docs[i];
+  for (let i = 0; i < this.docs.length; i += 1) {
+    const document = this.docs[i];
 
     const weight = getDocumentSearchWeight(document, searchText);
 
@@ -29,4 +37,4 @@ const search = (docs, searchText) => {
   return result;
 };
 
-export default search;
+export default SearchEngine;

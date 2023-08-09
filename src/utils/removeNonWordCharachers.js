@@ -1,7 +1,17 @@
 const removeNonWordCharachers = (word) => {
+  if (!word) {
+    return word;
+  }
+
   const regex = /\w+/;
 
-  const [match] = word.match(regex);
+  const matches = word.match(regex);
+
+  if (!matches) {
+    return '';
+  }
+
+  const [match] = matches;
 
   return match;
 };
